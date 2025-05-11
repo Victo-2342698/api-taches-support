@@ -88,23 +88,20 @@
         }
 
         async function recupererCle() {
-            const courriel = document.getElementById('courrielCle').value;
-            const password = document.getElementById('motdepasseCle').value;
-            const regenerer = document.getElementById('regenerer').checked;
+    const courriel = document.getElementById('courrielCle').value;
+    const password = document.getElementById('motdepasseCle').value;
+    const regenerer = document.getElementById('regenerer').checked;
 
-            const url = regenerer
-                ? 'https://api-taches.onrender.com/cle-api?regenerer=true'
-                : 'https://api-taches.onrender.com/cle-api';
+    const res = await fetch('https://api-taches.onrender.com/cle-api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ courriel, password, regenerer }) // <-- c’est ici la différence
+    });
 
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ courriel, password })
-            });
+    const data = await res.json();
+    alert(JSON.stringify(data, null, 2));
+}
 
-            const data = await res.json();
-            alert(JSON.stringify(data, null, 2));
-        }
     </script>
 </body>
 </html>
