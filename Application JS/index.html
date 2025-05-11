@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion des utilisateurs</title>
+</head>
+<body>
+  <h1>Créer un nouvel utilisateur</h1>
+  <form id="form-creer">
+    <input name="nom" placeholder="Nom" required>
+    <input name="prenom" placeholder="Prénom" required>
+    <input name="courriel" placeholder="Courriel" required>
+    <input name="password" placeholder="Mot de passe" required type="password">
+    <button type="submit">Créer</button>
+  </form>
+
+  <h2>Récupérer ou régénérer une clé API</h2>
+  <form id="form-cle">
+    <input name="courriel" placeholder="Courriel" required>
+    <input name="password" placeholder="Mot de passe" required type="password">
+    <label><input type="checkbox" name="regenerer"> Régénérer</label>
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script>
+    const baseUrl = 'https://api-taches.onrender.com';
+
+    document.getElementById('form-creer').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      const res = await fetch(`${baseUrl}/utilisateurs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      alert(await res.text());
+    });
+
+    document.getElementById('form-cle').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      const res = await fetch(`${baseUrl}/cle-api`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      alert(await res.text());
+    });
+  </script>
+</body>
+</html>
