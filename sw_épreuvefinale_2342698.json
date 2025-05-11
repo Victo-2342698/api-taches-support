@@ -387,8 +387,27 @@
 		{
 			"name": "Supprimer une sous-tâche",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api-taches.onrender.com/sous-taches/1",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"sous-taches",
+						"1"
+					]
+				}
 			},
 			"response": []
 		}

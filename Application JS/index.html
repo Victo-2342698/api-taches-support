@@ -1,51 +1,110 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Gestion des utilisateurs</title>
+    <meta charset="UTF-8">
+    <title>Épreuve finale - Services Web H25</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            margin: 5px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .bloc {
+            border: 1px solid #aaa;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <h1>Créer un nouvel utilisateur</h1>
-  <form id="form-creer">
-    <input name="nom" placeholder="Nom" required>
-    <input name="prenom" placeholder="Prénom" required>
-    <input name="courriel" placeholder="Courriel" required>
-    <input name="password" placeholder="Mot de passe" required type="password">
-    <button type="submit">Créer</button>
-  </form>
+    <h1>Épreuve finale - Services Web H25</h1>
+    <h2>Marwa El Houadi</h2>
+    <div class="container">
+        
+        <div class="bloc">
+            <h3>Création d’un utilisateur</h3>
+            <input type="text" id="prenom" placeholder="Votre prénom"><br>
+            <input type="text" id="nom" placeholder="Votre nom"><br>
+            <input type="email" id="courriel" placeholder="Votre courriel"><br>
+            <input type="password" id="motdepasse" placeholder="********"><br>
+            <button onclick="creerUtilisateur()">Créer</button>
+        </div>
 
-  <h2>Récupérer ou régénérer une clé API</h2>
-  <form id="form-cle">
-    <input name="courriel" placeholder="Courriel" required>
-    <input name="password" placeholder="Mot de passe" required type="password">
-    <label><input type="checkbox" name="regenerer"> Régénérer</label>
-    <button type="submit">Envoyer</button>
-  </form>
+        
+        <div class="bloc">
+            <h3>Récupération d’une clé api</h3>
+            <input type="email" id="courrielCle" placeholder="Votre courriel"><br>
+            <input type="password" id="motdepasseCle" placeholder="********"><br>
+            <label>
+                <input type="checkbox" id="regenerer"> générer une nouvelle clé
+            </label><br>
+            <button onclick="recupererCle()">Récupérer</button>
+        </div>
+    </div>
 
-  <script>
-    const baseUrl = 'https://api-taches.onrender.com';
+    <script>
+        async function creerUtilisateur() {
+            const prenom = document.getElementById('prenom').value;
+            const nom = document.getElementById('nom').value;
+            const courriel = document.getElementById('courriel').value;
+            const password = document.getElementById('motdepasse').value;
 
-    document.getElementById('form-creer').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target));
-      const res = await fetch(`${baseUrl}/utilisateurs`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      alert(await res.text());
-    });
+            const res = await fetch('https://api-taches.onrender.com/utilisateurs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prenom, nom, courriel, password })
+            });
 
-    document.getElementById('form-cle').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target));
-      const res = await fetch(`${baseUrl}/cle-api`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      alert(await res.text());
-    });
-  </script>
+            const data = await res.json();
+            alert(JSON.stringify(data, null, 2));
+        }
+
+        async function recupererCle() {
+            const courriel = document.getElementById('courrielCle').value;
+            const password = document.getElementById('motdepasseCle').value;
+            const regenerer = document.getElementById('regenerer').checked;
+
+            const url = regenerer
+                ? 'https://api-taches.onrender.com/cle-api?regenerer=true'
+                : 'https://api-taches.onrender.com/cle-api';
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ courriel, password })
+            });
+
+            const data = await res.json();
+            alert(JSON.stringify(data, null, 2));
+        }
+    </script>
 </body>
 </html>
