@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "505d077d-ec65-4d8b-82b3-c14096abce0d",
+		"name": "sw_épreuvefinale_2342698",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41198023"
+	},
+	"item": [
+		{
+			"name": "Créer un utilisateur",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nom\": \"El Houadi\",\r\n  \"prenom\": \"Marwa\",\r\n  \"courriel\": \"marwaelhouadi2@gmail.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/utilisateurs",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"utilisateurs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Récupérer clé API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"courriel\": \"marwaelhouadi20@gmail.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/cle-api",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"cle-api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter une tâche",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titre\": \"Finir le projet\",\r\n  \"description\": \"Remise de l'API\",\r\n  \"date_echeance\": \"2025-05-16\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/taches",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"taches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lister les tâches",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api-taches.onrender.com/taches?toutes=true",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"taches"
+					],
+					"query": [
+						{
+							"key": "toutes",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtenir une tâche avec ses sous-tâches",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api-taches.onrender.com/taches/1",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"taches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier une tâche",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titre\": \"Nouveau titre\",\r\n  \"description\": \"Nouvelle description\",\r\n  \"date_debut\": \"2025-05-12\",\r\n  \"date_echeance\": \"2025-05-18\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/taches/1",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"taches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Changer le statut d’une tâche",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"statut\": \"terminée\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/taches/1/statut",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"taches",
+						"1",
+						"statut"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer une tâche",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api-taches.onrender.com/taches/1",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"taches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ajouter une sous-tâche",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tache_id\": 2,\r\n  \"titre\": \"Écrire l’introduction\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/sous-taches",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"sous-taches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier une sous-tâche",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titre\": \"Écrire la conclusion\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/sous-taches/1",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"sous-taches",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modifier le statut d’une sous-tâche",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "9402fa5c-8532-4745-9c2b-7c81c9232c23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"statut\": \"terminée\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-taches.onrender.com/sous-taches/1/statut",
+					"protocol": "https",
+					"host": [
+						"api-taches",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"sous-taches",
+						"1",
+						"statut"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Supprimer une sous-tâche",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
